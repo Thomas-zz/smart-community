@@ -1,0 +1,133 @@
+{
+  "easycom": {
+    "autoscan": true,
+    "custom": {
+      // uni-ui 规则如下配置
+      "^uni-(.*)": "@dcloudio/uni-ui/lib/uni-$1/uni-$1.vue"
+    }
+  },
+  "pages": [
+    //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
+    {
+      "path": "pages/index/index",
+      "style": {
+        "navigationBarTitleText": "住得好",
+        "usingComponents": {
+          "van-notice-bar": "/wxcomponents/vant/notice-bar/index",
+          "van-grid": "/wxcomponents/vant/grid/index",
+          "van-grid-item": "/wxcomponents/vant/grid-item/index"
+        }
+      }
+    },
+    {
+      "path": "pages/login/login",
+      "style": {
+        "navigationBarTitleText": "登录",
+        "usingComponents": {
+          "van-count-down": "/wxcomponents/vant/count-down/index"
+        }
+      }
+    },
+    {
+      "path": "pages/shop/index",
+      "style": {
+        "navigationBarTitleText": "社区福利"
+      }
+    },
+    {
+      "path": "pages/user/index",
+      "style": {
+        "navigationBarTitleText": "用户中心"
+      }
+    },
+    {
+      "path": "pages/mainPages/complaintPage",
+      "style": {
+        "navigationBarTitleText": "投诉"
+      }
+    },
+    {
+      "path": "pages/mainPages/idCodePage",
+      "style": {
+        "navigationBarTitleText": "身份码"
+      }
+    },
+    {
+      "path": "pages/mainPages/newsPage",
+      "style": {
+        "navigationBarTitleText": "社区通知"
+      }
+    },
+    {
+      "path": "pages/mainPages/parkingSpacePage",
+      "style": {
+        "navigationBarTitleText": "停车位"
+      }
+    },
+    {
+      "path": "pages/mainPages/payPage",
+      "style": {
+        "navigationBarTitleText": "缴费"
+      }
+    },
+    {
+      "path": "pages/mainPages/proposalPage",
+      "style": {
+        "navigationBarTitleText": "建议"
+      }
+    },
+    {
+      "path": "pages/mainPages/repairPage",
+      "style": {
+        "navigationBarTitleText": "报修"
+      }
+    },
+    {
+      "path": "pages/mainPages/visitorPage",
+      "style": {
+        "navigationBarTitleText": "访客"
+      }
+    }
+  ],
+  "tabBar": {
+    "color": "#666666",
+    "selectedColor": "#f10b2e",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "iconPath": "/static/首页.png",
+        "selectedIconPath": "/static/首页-click.png",
+        "text": "首页"
+      },
+      {
+        "pagePath": "pages/shop/index",
+        "iconPath": "/static/福利.png",
+        "selectedIconPath": "/static/福利-click.png",
+        "text": "社区福利"
+      },
+      {
+        "pagePath": "pages/user/index",
+        "iconPath": "/static/我的.png",
+        "selectedIconPath": "/static/我的-click.png",
+        "text": "我的"
+      }
+    ]
+  },
+  "globalStyle": {
+    "navigationBarTextStyle": "black",
+    "navigationBarTitleText": "uni-app",
+    "navigationBarBackgroundColor": "#F8F8F8",
+    "backgroundColor": "#F8F8F8",
+    "usingComponents": {
+      "van-button": "/wxcomponents/vant/button/index",
+      "van-grid": "/wxcomponents/vant/grid/index",
+      "van-grid-item": "/wxcomponents/vant/grid-item/index",
+      "van-index-bar": "/wxcomponents/vant/index-bar/index",
+      "van-index-anchor": "/wxcomponents/vant/index-anchor/index",
+      "van-toast": "/wxcomponents/vant/toast/index",
+      "van-field": "/wxcomponents/vant/field/index",
+      "van-image": "/wxcomponents/vant/image/index",
+      "van-icon": "/wxcomponents/vant/icon/index"
+    }
+  }
+}
