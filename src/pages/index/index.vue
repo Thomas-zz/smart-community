@@ -51,9 +51,9 @@ function mainModule() {
     },
     {
       id: 2,
-      name: '社区新闻',
+      name: '社区公告',
       iconSrc: 'xinwen',
-      jumpTo: '/pages/mainPages/newsPage',
+      jumpTo: '/pages/mainPages/news/newsPage',
     },
     {
       id: 3,

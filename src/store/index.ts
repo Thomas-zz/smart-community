@@ -25,14 +25,37 @@ interface IuserMsg {
   userInfo?: IuserInfo
 }
 
+interface Ilist {
+  announcementId: number
+  title: string
+  typeName: string
+  context: string
+  releaseTime: string
+  file: ({
+    fileType: string
+    url: string
+  } | null)[]
+}
+type InewsList = Ilist[] | null
+
 const store = createStore({
   state: {
     //存放用户信息
     userMsg: getLocalUserMsg(),
+    newsList: <InewsList>[],
   },
   getters: {
     getUserToken(state) {
       return state.userMsg.userToken || ''
+    },
+    getNewsDetails: (state) => (id: number) => {
+      if (state.newsList === null) return null
+      for (let item of state.newsList) {
+        if (item.announcementId === id) {
+          return item
+        }
+      }
+      return null
     },
   },
   mutations: {
@@ -46,6 +69,10 @@ const store = createStore({
     setUserInfo(state, data: IuserInfo) {
       state.userMsg.userInfo = data
       setLocalUserMsg(state)
+    },
+    // 更新公告列表
+    setNewsList(state, newList) {
+      state.newsList = newList
     },
   },
   actions: {},

@@ -44,7 +44,7 @@
     "@dcloudio/uni-mp-toutiao": "^3.0.0-alpha-3031220220222002",
     "@dcloudio/uni-mp-weixin": "^3.0.0-alpha-3031220220222002",
     "@dcloudio/uni-quickapp-webview": "^3.0.0-alpha-3031220220222002",
-    "@dcloudio/uni-ui": "^1.4.12",
+    "@dcloudio/uni-ui": "^1.4.13",
     "@vant/weapp": "^1.10.2",
     "axios": "^0.26.1",
     "pinia": "^2.0.0-rc.10",
@@ -79,5 +79,11 @@
     "sass-loader": "^12.6.0",
     "typescript": "^4.5.2",
     "vite": "^2.8.4"
+  },
+  "easycom": {
+    "autoscan": true,
+    "custom": {
+      "^uni-(.*)": "@dcloudio/uni-ui/lib/uni-$1/uni-$1.vue"
+    }
   }
 }

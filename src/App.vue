@@ -1,8 +1,6 @@
 <script setup lang="ts">
 import { onLaunch, onShow, onHide, onLoad } from '@dcloudio/uni-app'
-onLoad(() => {
-  uni.clearStorage()
-})
+onLoad(() => {})
 onLaunch(() => {
   // console.log('App Launch')
 })
