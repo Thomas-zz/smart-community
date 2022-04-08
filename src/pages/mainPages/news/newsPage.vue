@@ -15,7 +15,7 @@
           >
             <template v-slot:header>
               <!-- 当前判断长度只为简单判断类型，实际业务中，根据逻辑直接渲染即可 -->
-              <image class="image-1" :src="item.file[0]?.url" mode="aspectFill"></image>
+              <image class="image-1" :src="item.url ? item.url : defaultImgUrl" mode="aspectFill"></image>
             </template>
           </uni-list-item>
         </uni-list>
@@ -31,7 +31,6 @@
 <script setup lang="ts">
 import { reactive } from 'vue'
 import CommunityApi from '@/request/api/community'
-import store from '@/store/index'
 
 interface Ilist {
   announcementId: number
@@ -39,10 +38,7 @@ interface Ilist {
   typeName: string
   context: string
   releaseTime: string
-  file: ({
-    fileType: string
-    url: string
-  } | null)[]
+  url: string | null
 }
 
 interface InewsList {
@@ -53,6 +49,8 @@ interface InewsList {
     total: number
   } | null
 }
+
+const defaultImgUrl = `https://intelligent-community.oss-cn-guangzhou.aliyuncs.com/image/1/2/6b2e92c8f48040db9994cb383b33689e.png`
 
 let newsList: InewsList = reactive({ list: null })
 getNewsList(newsList)
@@ -66,7 +64,7 @@ function getNewsList(newsList: InewsList) {
         title: res.msg || '新闻列表获取失败，请刷新重试',
       })
     }
-    // console.log(newsList)
+    console.log(newsList)
   })
 }
 </script>

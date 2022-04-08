@@ -16,7 +16,7 @@ const CommunityApi = {
     })
   },
   // 公告详情
-  getNewsDetail(announcementId: number) {
+  getNewsDetails(announcementId: number): IPromise {
     const url = `/user/announcement/detail`
     return request({
       url,
@@ -37,6 +37,7 @@ const CommunityApi = {
       method: 'GET',
     })
   },
+  //
 }
 
 export default CommunityApi

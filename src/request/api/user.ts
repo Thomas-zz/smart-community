@@ -23,6 +23,14 @@ const UserApi = {
       method: 'POST',
     })
   },
+  // 获取用户所属小区的列表
+  getCommunityList(): IPromise {
+    const url = `/user/community/list`
+    return request({
+      url,
+      method: 'POST',
+    })
+  },
 }
 
 export default UserApi

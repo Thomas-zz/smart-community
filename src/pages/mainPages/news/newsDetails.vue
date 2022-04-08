@@ -33,6 +33,7 @@
 import { reactive } from 'vue'
 import { onLoad } from '@dcloudio/uni-app'
 import store from '@/store/index'
+import CommunityApi from '@/request/api/community'
 
 interface Ilist {
   announcementId: number
@@ -54,9 +55,21 @@ let newsId: number
 let newsDetails: InewsList = reactive({ list: null })
 onLoad((option) => {
   newsId = Number(option.newsId)
-  newsDetails.list = store.getters.getNewsDetails(newsId)
-  console.log(newsDetails.list)
+  getNewsDetail(newsId)
+  // console.log(newsDetails.list)
 })
+
+function getNewsDetail(announcementId: number) {
+  CommunityApi.getNewsDetails(announcementId).then((res) => {
+    if (res.code === 200) {
+      newsDetails.list = res.data
+    } else {
+      uni.showToast({
+        title: res.msg || '新闻列表获取失败，请刷新重试',
+      })
+    }
+  })
+}
 </script>
 <style scoped lang="scss">
 .container {

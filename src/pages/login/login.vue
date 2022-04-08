@@ -123,6 +123,8 @@ const submitForm = () => {
             })
             // 获取用户个人信息
             getUserInfo()
+            // 获取用户所属小区列表
+            getCommunityList()
           }
         })
       } else {
@@ -141,6 +143,7 @@ const submitForm = () => {
   })
 }
 
+// 获取用户信息
 const getUserInfo = () => {
   UserApi.getUserInfo().then((res) => {
     console.log(res)
@@ -151,6 +154,19 @@ const getUserInfo = () => {
           url: '/pages/index/index',
         })
       }, 1500)
+    } else {
+      uni.showToast({
+        title: res.msg || '用户信息获取失败',
+      })
+    }
+  })
+}
+
+// 获取用户所属小区列表
+const getCommunityList = () => {
+  UserApi.getCommunityList().then((res) => {
+    if (res.code === 200) {
+      store.commit('setCommunityList', res.data)
     } else {
       uni.showToast({
         title: res.msg || '用户信息获取失败',

@@ -148,7 +148,11 @@
       "van-icon": "/wxcomponents/vant/icon/index",
       "van-cell": "/wxcomponents/vant/cell/index",
       "van-cell-group": "/wxcomponents/vant/cell-group/index",
-      "van-skeleton": "/wxcomponents/vant/skeleton/index"
+      "van-skeleton": "/wxcomponents/vant/skeleton/index",
+      "van-row": "/wxcomponents/vant/row/index",
+      "van-col": "/wxcomponents/vant/col/index",
+      "van-divider": "/wxcomponents/vant/divider/index",
+      "van-popup": "/wxcomponents/vant/popup/index"
     }
   }
 }
