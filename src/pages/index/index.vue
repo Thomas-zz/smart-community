@@ -1,12 +1,16 @@
 <template>
   <view class="content">
-    <!-- <view class="announcement">
-      <p>公告列表</p>
-      <ul class="announce-ul">
-        <li class="announce-li">嗨嗨嗨</li>
-      </ul>
-    </view> -->
-    <van-grid square icon-size="50rpx">
+    <view class="userMsg">
+      <view class="community" @click="changeCommunity"
+        ><text class="community-name hidden">{{ communityName }}</text
+        ><i class="iconfont iconfont-xiangxia icon"></i>
+      </view>
+      <view class="userName">
+        <text v-if="isLogin()" class="hidden">欢迎您：{{ name }}</text>
+        <van-button v-else type="primary" size="mini" @click="WxLogin">登录</van-button>
+      </view>
+    </view>
+    <van-grid class="mainModules" square icon-size="50rpx">
       <van-grid-item
         v-for="item of mainModules"
         :key="item.id"
@@ -21,8 +25,7 @@
         <p>{{ item.name }}</p> -->
       </van-grid-item>
     </van-grid>
-    <text v-if="isLogin()">欢迎您 {{ userName() }}</text>
-    <van-button v-else type="primary" size="mini" @click="WxLogin">登录</van-button>
+
     <text selectable="true">userCode: {{ loginCode }}</text>
   </view>
 </template>
@@ -97,15 +100,24 @@ const isLogin = () => {
 }
 
 // 用户信息
-const userName = () => {
+const { name, communityName } = getUserMsg()
+function getUserMsg() {
   let name = store.state.userMsg.userInfo?.name || ''
-  let gender = store.state.userMsg.userInfo?.gender || '男'
-  if (name !== '') {
-    name = name.slice(0, 1) + (gender === '男' ? '先生' : '女士')
-  } else {
-    name = '小区业主'
-  }
-  return name
+  let communityName = ref('')
+  ;(function userName() {
+    let gender = store.state.userMsg.userInfo?.gender || '男'
+    if (name !== '') {
+      name = name.slice(0, 1) + (gender === '男' ? '先生' : '女士')
+    } else {
+      name = '小区业主'
+    }
+    return name
+  })()
+  ;(function getCommunityName() {
+    let community = store.getters.getCommunity(store.state.communityId)
+    communityName.value = community ? community.name : '请登录'
+  })()
+  return { name, communityName }
 }
 
 // 登录与跳转
@@ -123,7 +135,7 @@ function WxLogin() {
             // 携带 code 发送登录请求
             loginCode.value = res.code
             loginApi.authorization(res.code).then((res) => {
-              // console.log(res)
+              console.log(res)
               const { code, data, msg } = res
               if (code === -203) {
                 // console.log(msg)
@@ -133,6 +145,7 @@ function WxLogin() {
               } else if (code === 200) {
                 store.commit('setUserToken', data.token)
                 getUserInfo()
+                getCommunityList()
               }
             })
           } else {
@@ -179,10 +192,32 @@ const getUserInfo = () => {
     }
   })
 }
+
+// 获取用户所属小区列表
+const getCommunityList = () => {
+  UserApi.getCommunityList().then((res) => {
+    console.log(res)
+    if (res.code === 200) {
+      store.commit('setCommunityList', res.data)
+    } else {
+      uni.showToast({
+        title: res.msg || '用户信息获取失败',
+        icon: 'none',
+      })
+    }
+  })
+}
+
+function changeCommunity() {
+  uni.navigateTo({
+    url: '/pages/index/changeCommunityPage',
+  })
+}
 </script>
 
 <style lang="scss">
 .content {
+  margin: 20rpx;
   .announcement {
     margin-top: 10rpx;
     text-align: center;
@@ -192,5 +227,38 @@ const getUserInfo = () => {
 .title {
   font-size: 36rpx;
   color: #8f8f94;
+}
+
+.userMsg {
+  display: flex;
+  font-size: 32rpx;
+  line-height: 48rpx;
+  padding: 0 30rpx;
+  // background: #bb3b3f;
+  .community {
+    width: 50%;
+    // background: rebeccapurple;
+    flex: none;
+
+    .community-name {
+      display: inline-block;
+    }
+    .icon {
+      position: relative;
+      display: inline-block;
+      top: -12%;
+    }
+  }
+  .userName {
+    // background: red;
+    text-align: right;
+    flex: auto;
+  }
+}
+
+.hidden {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 </style>

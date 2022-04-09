@@ -94,6 +94,12 @@
       "style": {
         "navigationBarTitleText": "访客"
       }
+    },
+    {
+      "path": "page/index/changeCommunityPage",
+      "style": {
+        "navigationBarTitleText": "切换小区"
+      }
     }
   ],
   "condition": {
@@ -152,7 +158,9 @@
       "van-row": "/wxcomponents/vant/row/index",
       "van-col": "/wxcomponents/vant/col/index",
       "van-divider": "/wxcomponents/vant/divider/index",
-      "van-popup": "/wxcomponents/vant/popup/index"
+      "van-popup": "/wxcomponents/vant/popup/index",
+      "van-transition": "/wxcomponents/vant/transition/index",
+      "van-dialog": "/wxcomponents/vant/dialog/index"
     }
   }
 }

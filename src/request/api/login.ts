@@ -13,7 +13,7 @@ const loginApi = {
     })
   },
   sendMessage(phone: string): IPromise {
-    const url = `/user/send/message`
+    const url = `/common/send/message`
     console.log(phone)
     return request({
       url,
@@ -21,7 +21,7 @@ const loginApi = {
       method: 'GET',
     })
   },
-  // 验证电话号码，注册用户
+  // 验证电话号码
   checkCode(messageCode: string, phone: string, wxCode: string): IPromise {
     const url = `/user/check/code`
     console.log({

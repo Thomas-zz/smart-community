@@ -62,6 +62,7 @@ function getNewsList(newsList: InewsList) {
     } else {
       uni.showToast({
         title: res.msg || '新闻列表获取失败，请刷新重试',
+        icon: 'none',
       })
     }
     console.log(newsList)

@@ -49,13 +49,19 @@ const store = createStore({
     getUserToken(state) {
       return state.userMsg.userToken || ''
     },
+    // 根据id查询小区信息
+    getCommunity:
+      (state) =>
+      (id: number): IcommunityList | undefined => {
+        return state.userMsg.communityList?.find((list) => list.communityId === id)
+      },
   },
   mutations: {
     // 修改 token
     setUserToken(state, userToken: string) {
       state.userMsg.userToken = userToken
       // 存入 localStorage 中
-      setLocalMsg(state.userMsg, '')
+      setLocalMsg(state.userMsg, 'user_msg')
     },
     // 修改用户信息
     setUserInfo(state, data: IuserInfo) {

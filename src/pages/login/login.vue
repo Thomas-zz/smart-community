@@ -81,7 +81,7 @@ const sendCheckCode = () => {
     sendTime--
     if (!isSend) {
       loginApi.sendMessage(formData.phone).then((res) => {
-        console.log(res)
+        // console.log(res)
         if (res.code !== 200) {
           uni.showToast({
             title: res.msg || '请求有误',
@@ -131,6 +131,7 @@ const submitForm = () => {
         console.log('登录失败！' + res.errMsg)
         uni.showToast({
           title: res.errMsg || '登录失败！',
+          icon: 'none',
         })
       }
     },
@@ -146,7 +147,7 @@ const submitForm = () => {
 // 获取用户信息
 const getUserInfo = () => {
   UserApi.getUserInfo().then((res) => {
-    console.log(res)
+    // console.log(res)
     if (res.code === 200) {
       store.commit('setUserInfo', res.data)
       setTimeout(() => {
@@ -157,6 +158,7 @@ const getUserInfo = () => {
     } else {
       uni.showToast({
         title: res.msg || '用户信息获取失败',
+        icon: 'none',
       })
     }
   })
@@ -165,11 +167,13 @@ const getUserInfo = () => {
 // 获取用户所属小区列表
 const getCommunityList = () => {
   UserApi.getCommunityList().then((res) => {
+    console.log(res)
     if (res.code === 200) {
       store.commit('setCommunityList', res.data)
     } else {
       uni.showToast({
         title: res.msg || '用户信息获取失败',
+        icon: 'none',
       })
     }
   })

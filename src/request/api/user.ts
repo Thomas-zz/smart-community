@@ -14,6 +14,10 @@ const UserApi = {
   // 用户支付账单
   payBill(billId: number, payPwd: string): IPromise {
     const url = `/user/wx/pay/bill`
+    console.log({
+      billId,
+      payPwd,
+    })
     return request({
       url,
       data: {
@@ -28,7 +32,7 @@ const UserApi = {
     const url = `/user/community/list`
     return request({
       url,
-      method: 'POST',
+      method: 'GET',
     })
   },
 }
