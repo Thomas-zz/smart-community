@@ -6,12 +6,16 @@ const loginApi = {
   // 获取用户码
   authorization(code: string): IPromise {
     const url = `/user/authorization`
+    console.log(code)
     return request({
       url,
-      data: code,
+      data: {
+        code,
+      },
       method: 'GET',
     })
   },
+  // 发送短信
   sendMessage(phone: string): IPromise {
     const url = `/common/send/message`
     console.log(phone)

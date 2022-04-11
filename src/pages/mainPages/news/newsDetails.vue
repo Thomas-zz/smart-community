@@ -32,7 +32,6 @@
 <script setup lang="ts">
 import { reactive } from 'vue'
 import { onLoad } from '@dcloudio/uni-app'
-import store from '@/store/index'
 import CommunityApi from '@/request/api/community'
 
 interface Ilist {

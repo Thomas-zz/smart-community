@@ -31,10 +31,11 @@
 </template>
 
 <script setup lang="ts">
-import { ref, reactive, computed } from 'vue'
+import { ref, reactive, computed, watch } from 'vue'
 import loginApi from '@/request/api/login'
 import UserApi from '@/request/api/user'
 import store from '@/store/index'
+import CommunityApi from '@/request/api/community'
 
 // 主要模块的展示
 const { mainModules, jumpTo } = mainModule()
@@ -95,29 +96,55 @@ function mainModule() {
 
 // 是否已经登录
 const isLogin = () => {
-  console.log(store.getters.getUserToken || '莫得')
   return store.getters.getUserToken !== ''
 }
-
+console.log(store.state.userMsg)
+console.log(store.state.communityMsg)
 // 用户信息
 const { name, communityName } = getUserMsg()
 function getUserMsg() {
-  let name = store.state.userMsg.userInfo?.name || ''
+  let name = ref(store.getters.getUserName || '')
   let communityName = ref('')
-  ;(function userName() {
-    let gender = store.state.userMsg.userInfo?.gender || '男'
-    if (name !== '') {
-      name = name.slice(0, 1) + (gender === '男' ? '先生' : '女士')
-    } else {
-      name = '小区业主'
+  let userName = computed(() => store.getters.getUserName)
+  let communityComputer = computed(() => store.state.communityMsg.currentCommunity)
+  watch(
+    userName,
+    (oldName, newName) => {
+      // console.log(oldName + '  ' + newName)
+      // console.log(name.value)
+      if (!isLogin()) return
+      let gender = ref(store.getters.getUserGender || '男')
+      if (oldName) {
+        name.value = oldName.slice(0, 1) + (gender.value === '男' ? '先生' : '女士')
+      } else {
+        name.value = '小区业主'
+      }
+    },
+    { immediate: true }
+  )
+  watch(
+    communityComputer,
+    (oldVal, newVal) => {
+      // console.log(oldVal + ' ' + newVal)
+      if (!isLogin()) communityName.value = '请登录'
+      else {
+        communityName.value = oldVal?.name!
+      }
+    },
+    {
+      immediate: true,
     }
-    return name
-  })()
+  )
   ;(function getCommunityName() {
-    let community = store.getters.getCommunity(store.state.communityId)
+    let community = store.state.communityMsg.currentCommunity
     communityName.value = community ? community.name : '请登录'
   })()
   return { name, communityName }
+}
+
+// 获取用户信息、所属小区列表、当前浏览的小区信息
+const getDate = () => {
+  return Promise.all([UserApi.getUserInfo(), CommunityApi.getCommunityList(), CommunityApi.getCommunityDetail()])
 }
 
 // 登录与跳转
@@ -144,8 +171,14 @@ function WxLogin() {
                 })
               } else if (code === 200) {
                 store.commit('setUserToken', data.token)
-                getUserInfo()
-                getCommunityList()
+                getDate().then((res) => {
+                  console.log(res)
+                  const [userInfo, communityList, communityDetail] = res
+                  store.commit('setUserInfo', userInfo.data)
+                  console.log(communityList.data)
+                  store.commit('setCommunityList', communityList.data)
+                  store.commit('setCurrentCommunity', communityDetail.data)
+                })
               }
             })
           } else {
@@ -171,40 +204,6 @@ function WxLogin() {
         duration: 2000,
       })
     },
-  })
-}
-
-// 获取用户信息
-const getUserInfo = () => {
-  UserApi.getUserInfo().then((res) => {
-    console.log(res)
-    if (res.code === 200) {
-      store.commit('setUserInfo', res.data)
-      setTimeout(() => {
-        uni.switchTab({
-          url: '/pages/index/index',
-        })
-      }, 1500)
-    } else {
-      uni.showToast({
-        title: res.msg || '用户信息获取失败',
-      })
-    }
-  })
-}
-
-// 获取用户所属小区列表
-const getCommunityList = () => {
-  UserApi.getCommunityList().then((res) => {
-    console.log(res)
-    if (res.code === 200) {
-      store.commit('setCommunityList', res.data)
-    } else {
-      uni.showToast({
-        title: res.msg || '用户信息获取失败',
-        icon: 'none',
-      })
-    }
   })
 }
 

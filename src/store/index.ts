@@ -11,12 +11,12 @@ const getLocalUserMsg = (): IuserMsg => {
   return userMsg ? JSON.parse(userMsg) : {}
 }
 
-const getLocalCommunityId = () => {
-  const userMsg = uni.getStorageSync('community_id')
-  return userMsg ? JSON.parse(userMsg) : 1
+const getLocalCommunityMsg = (): IcommunityMsg => {
+  const communityMsg = uni.getStorageSync('community_msg')
+  return communityMsg ? JSON.parse(communityMsg) : {}
 }
 
-// 用户信息
+// 用户个人信息
 interface IuserInfo {
   age?: number | null
   email?: string | null
@@ -25,17 +25,26 @@ interface IuserInfo {
   nickName?: string | null
   phone?: string | null
 }
+// 用户相关的所有信息
+interface IuserMsg {
+  userToken?: string
+  userInfo?: IuserInfo
+}
 
-// 用户所属的所有小区
+// 用户所属的小区列表
 interface IcommunityList {
   communityId: number
   location: string
   name: string
   addressDetail: string
 }
-interface IuserMsg {
-  userToken?: string
-  userInfo?: IuserInfo
+
+interface IcommunityMsg {
+  currentCommunity?: {
+    addressDetail: string
+    location: string
+    name: string
+  } | null
   communityList?: IcommunityList[]
 }
 
@@ -43,20 +52,27 @@ const store = createStore({
   state: {
     //存放用户信息
     userMsg: getLocalUserMsg(),
-    communityId: getLocalCommunityId(),
+    communityMsg: getLocalCommunityMsg(),
   },
   getters: {
     getUserToken(state) {
       return state.userMsg.userToken || ''
     },
-    // 根据id查询小区信息
-    getCommunity:
-      (state) =>
-      (id: number): IcommunityList | undefined => {
-        return state.userMsg.communityList?.find((list) => list.communityId === id)
-      },
+    getUserName(state) {
+      return state.userMsg.userInfo?.name
+    },
+    getUserGender(state) {
+      return state.userMsg.userInfo?.gender
+    },
   },
   mutations: {
+    // 清空本地缓存
+    cleanState(state) {
+      state.userMsg = {}
+      state.communityMsg = {}
+      setLocalMsg('', 'user_msg')
+      setLocalMsg('', 'community_msg')
+    },
     // 修改 token
     setUserToken(state, userToken: string) {
       state.userMsg.userToken = userToken
@@ -68,15 +84,15 @@ const store = createStore({
       state.userMsg.userInfo = data
       setLocalMsg(state.userMsg, 'user_msg')
     },
-    // 修改用户所属小区信息
+    // 修改用户所属小区列表
     setCommunityList(state, data) {
-      state.userMsg.communityList = data
-      setLocalMsg(state.userMsg, 'user_msg')
+      state.communityMsg.communityList = data
+      setLocalMsg(state.communityMsg, 'community_msg')
     },
-    // 切换小区
-    changeComunityList(state, communityId: number) {
-      state.communityId = communityId
-      setLocalMsg(state.userMsg, 'community_id')
+    // 修改用户当前所属小区信息
+    setCurrentCommunity(state, data) {
+      state.communityMsg.currentCommunity = data
+      setLocalMsg(state.communityMsg, 'community_msg')
     },
   },
   actions: {},

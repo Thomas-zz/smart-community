@@ -96,7 +96,7 @@
       }
     },
     {
-      "path": "page/index/changeCommunityPage",
+      "path": "pages/index/changeCommunityPage",
       "style": {
         "navigationBarTitleText": "切换小区"
       }

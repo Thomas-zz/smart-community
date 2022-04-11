@@ -46,10 +46,11 @@
 
 <script setup lang="ts">
 import { ref, reactive } from 'vue'
-import Toast from '@/wxcomponents/vant/toast/toast'
 import loginApi from '@/request/api/login'
 import UserApi from '@/request/api/user'
+import CommunityApi from '@/request/api/community'
 import store from '@/store/index'
+// import communityHook from '@/hooks/communityHook'
 
 // 是否已发送验证码
 let isSend = false
@@ -99,6 +100,10 @@ const sendCheckCode = () => {
   }
 }
 
+const getDate = () => {
+  return Promise.all([UserApi.getUserInfo(), CommunityApi.getCommunityList(), CommunityApi.getCommunityDetail()])
+}
+
 // 提交注册信息，校验验证码
 const submitForm = () => {
   uni.login({
@@ -121,10 +126,17 @@ const submitForm = () => {
               title: '登录中',
               icon: 'loading',
             })
-            // 获取用户个人信息
-            getUserInfo()
-            // 获取用户所属小区列表
-            getCommunityList()
+            // // 获取用户个人信息
+            // getUserInfo()
+            // // 获取用户所属小区列表
+            // communityHook.getCommunityList()
+            getDate().then((res) => {
+              console.log(res)
+              const [userInfo, communityList, communityDetail] = res
+              store.commit('setUserInfo', userInfo.data)
+              store.commit('setCommunityList', communityList.data)
+              store.commit('setCurrentCommunity', communityDetail.data)
+            })
           }
         })
       } else {
@@ -155,21 +167,6 @@ const getUserInfo = () => {
           url: '/pages/index/index',
         })
       }, 1500)
-    } else {
-      uni.showToast({
-        title: res.msg || '用户信息获取失败',
-        icon: 'none',
-      })
-    }
-  })
-}
-
-// 获取用户所属小区列表
-const getCommunityList = () => {
-  UserApi.getCommunityList().then((res) => {
-    console.log(res)
-    if (res.code === 200) {
-      store.commit('setCommunityList', res.data)
     } else {
       uni.showToast({
         title: res.msg || '用户信息获取失败',

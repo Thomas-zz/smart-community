@@ -122,6 +122,7 @@ function getBillList() {
     } else {
       uni.showToast({
         title: res.msg || '账单获取失败',
+        icon: 'none',
       })
     }
     console.log(billList.data)

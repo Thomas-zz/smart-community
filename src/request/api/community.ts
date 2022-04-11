@@ -37,7 +37,33 @@ const CommunityApi = {
       method: 'GET',
     })
   },
-  //
+  // 获取用户当前浏览的小区信息
+  getCommunityDetail(): IPromise {
+    const url = `/user/community/detail`
+    return request({
+      url,
+      method: 'GET',
+    })
+  },
+  // 获取用户所属小区的列表
+  getCommunityList(): IPromise {
+    const url = `/user/community/list`
+    return request({
+      url,
+      method: 'GET',
+    })
+  },
+  // 切换小区
+  switchCommunity(communityId: number): IPromise {
+    const url = `/user/community/switch`
+    return request({
+      url,
+      data: {
+        communityId,
+      },
+      method: 'POST',
+    })
+  },
 }
 
 export default CommunityApi
