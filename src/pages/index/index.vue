@@ -98,8 +98,7 @@ function mainModule() {
 const isLogin = () => {
   return store.getters.getUserToken !== ''
 }
-console.log(store.state.userMsg)
-console.log(store.state.communityMsg)
+console.log(store.state.userMsg.userToken)
 // 用户信息
 const { name, communityName } = getUserMsg()
 function getUserMsg() {
@@ -110,7 +109,7 @@ function getUserMsg() {
   watch(
     userName,
     (oldName, newName) => {
-      // console.log(oldName + '  ' + newName)
+      console.log(oldName + '  ' + newName)
       // console.log(name.value)
       if (!isLogin()) return
       let gender = ref(store.getters.getUserGender || '男')

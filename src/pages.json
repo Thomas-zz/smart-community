@@ -100,6 +100,14 @@
       "style": {
         "navigationBarTitleText": "切换小区"
       }
+    },
+    {
+      "path": "pages/shop/productPage",
+      "style": {}
+    },
+    {
+      "path": "pages/shop/productDetail",
+      "style": {}
     }
   ],
   "condition": {
@@ -160,7 +168,9 @@
       "van-divider": "/wxcomponents/vant/divider/index",
       "van-popup": "/wxcomponents/vant/popup/index",
       "van-transition": "/wxcomponents/vant/transition/index",
-      "van-dialog": "/wxcomponents/vant/dialog/index"
+      "van-dialog": "/wxcomponents/vant/dialog/index",
+      "van-card": "/wxcomponents/vant/card/index",
+      "van-notice-bar": "/wxcomponents/vant/notice-bar/index"
     }
   }
 }
