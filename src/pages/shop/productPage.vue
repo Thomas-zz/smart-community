@@ -106,7 +106,13 @@ function getShopDetail(shopId: number) {
 
 function jumpToDetail(commodityId: number) {
   uni.navigateTo({
-    url: '/pages/shop/productDetail?shopId=' + shopId + '&commodityId=' + commodityId,
+    url:
+      '/pages/shop/productDetail?shopId=' +
+      shopId +
+      '&commodityId=' +
+      commodityId +
+      '&shopName=' +
+      shopDetail.detail?.shopName,
   })
 }
 </script>

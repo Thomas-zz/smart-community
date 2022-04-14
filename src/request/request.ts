@@ -1,5 +1,6 @@
 import store from '@/store'
 const BASE_URL = 'http://community.ifast3.vipnps.vip:80' //域名或选取所有接口不变的那一部分
+// const BASE_URL = 'http://101.43.4.133:8080' //域名或选取所有接口不变的那一部分
 
 interface Ioptions {
   url: string

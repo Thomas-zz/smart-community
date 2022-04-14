@@ -108,6 +108,20 @@
     {
       "path": "pages/shop/productDetail",
       "style": {}
+    },
+    {
+      "path": "pages/shop/order/orderDetail",
+      "style": {}
+    },
+    {
+      "path": "pages/shop/order/placeOrder",
+      "style": {}
+    },
+    {
+      "path": "pages/shop/order/paymentCompleted",
+      "style": {
+        "navigationBarTitleText": "支付详情"
+      }
     }
   ],
   "condition": {

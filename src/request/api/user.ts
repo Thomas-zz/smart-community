@@ -14,10 +14,6 @@ const UserApi = {
   // 用户支付账单
   payBill(billId: number, payPwd: string): IPromise {
     const url = `/user/wx/pay/bill`
-    console.log({
-      billId,
-      payPwd,
-    })
     return request({
       url,
       data: {
@@ -25,6 +21,14 @@ const UserApi = {
         payPwd,
       },
       method: 'POST',
+    })
+  },
+  // 查看用户余额
+  checkBalance(): IPromise {
+    const url = `/user/balance`
+    return request({
+      url,
+      method: 'GET',
     })
   },
 }

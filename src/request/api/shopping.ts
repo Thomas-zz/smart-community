@@ -16,7 +16,7 @@ const ShoppingApi = {
   },
   // 取消商品订单
   cancelOrder(shoppingOrderId: number): IPromise {
-    const url = `user/shopping/cancel/shopping/order`
+    const url = `/user/shopping/cancel/shopping/order`
     return request({
       url,
       data: {
@@ -27,7 +27,7 @@ const ShoppingApi = {
   },
   // 选择服务时间
   choseServiceTime(shoppingOrderId: number, beginServiceTime: string, endServiceTime: string): IPromise {
-    const url = `user/shopping/chose/service/time`
+    const url = `/user/shopping/chose/service/time`
     return request({
       url,
       data: {
@@ -40,7 +40,7 @@ const ShoppingApi = {
   },
   // 订单详情
   shoppingDetail(shoppingOrderId: number): IPromise {
-    const url = `user/shopping/detail`
+    const url = `/user/shopping/detail`
     return request({
       url,
       data: {
@@ -51,7 +51,7 @@ const ShoppingApi = {
   },
   // 订单列表
   shoppingInfo(pageNum: number, pageSize: number): IPromise {
-    const url = `user/shopping/find/info`
+    const url = `/user/shopping/find/info`
     return request({
       url,
       data: {
@@ -62,8 +62,11 @@ const ShoppingApi = {
     })
   },
   // 支付订单
-  payShoppingOrder(shoppingOrderId: number) {
-    const url = `user/shopping/pay/shopping/order`
+  payShoppingOrder(shoppingOrderId: number): IPromise {
+    const url = `/user/shopping/pay/shopping/order`
+    uni.showLoading({
+      title: '支付中...',
+    })
     return request({
       url,
       data: {
@@ -73,8 +76,8 @@ const ShoppingApi = {
     })
   },
   // 生成订单
-  placeOrder(shopId: number, commodityList: { commodityId: number; count: number }[]) {
-    const url = `user/shopping/place/order`
+  placeOrder(shopId: number, commodityList: { commodityId: number; count: number }[]): IPromise {
+    const url = `/user/shopping/place/order`
     return request({
       url,
       data: {

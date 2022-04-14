@@ -33,12 +33,22 @@
         </view>
       </view>
     </van-skeleton>
+    <view class="bottom">
+      <view class="price">
+        <text class="now-price">价格</text>
+        <text class="origin-price">原价</text>
+      </view>
+      <view class="buy">
+        <view class="buy-btn" @click="placeOrder()">立即购买</view>
+      </view>
+    </view>
   </view>
 </template>
 
 <script setup lang="ts">
 import { onLoad } from '@dcloudio/uni-app'
 import ShopApi from '@/request/api/shop'
+import ShoppingApi from '@/request/api/shopping'
 import { reactive } from 'vue'
 
 interface Icommodity {
@@ -55,9 +65,13 @@ interface Icommodity {
   } | null
 }
 
+let shopId = 0
+let shopName = ''
+let commodityId = 0
 onLoad((option) => {
-  let shopId = Number(option.shopId)
-  let commodityId = Number(option.commodityId)
+  shopId = Number(option.shopId)
+  commodityId = Number(option.commodityId)
+  shopName = option.shopName!
   getCommodityDetail(shopId, commodityId)
 })
 
@@ -77,5 +91,57 @@ function getCommodityDetail(shopId: number, commodityId: number) {
     }
   })
 }
+
+function placeOrder() {
+  const commodityList = {
+    commodityId,
+    count: 1,
+  }
+  ShoppingApi.placeOrder(shopId, [commodityList]).then((res) => {
+    console.log(res)
+    let { price, description, name } = commodity.commodity!
+    const rest =
+      'shopId=' +
+      shopId +
+      '&shopName=' +
+      shopName +
+      '&price=' +
+      price +
+      '&desc=' +
+      description +
+      '&name=' +
+      name +
+      '&imgUrl=' +
+      commodity.commodity!.file[0].url
+    uni.navigateTo({
+      url: '/pages/shop/order/placeOrder?' + rest,
+    })
+    if (res.code === 200) {
+    } else {
+      uni.showToast({
+        title: res.msg || '订单创建失败',
+        icon: 'none',
+      })
+    }
+  })
+}
 </script>
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+.bottom {
+  position: fixed;
+  bottom: 0;
+  background: #ffffff;
+  .price {
+    display: inline-block;
+    width: 50%;
+  }
+  .buy {
+    display: inline-block;
+    width: 50%;
+    .buy-btn {
+      margin: 1px solid #4a5865;
+      border-radius: 10rpx;
+    }
+  }
+}
+</style>
