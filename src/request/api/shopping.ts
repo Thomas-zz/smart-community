@@ -26,7 +26,7 @@ const ShoppingApi = {
     })
   },
   // 选择服务时间
-  choseServiceTime(shoppingOrderId: number, beginServiceTime: string, endServiceTime: string): IPromise {
+  choseServiceTime(shoppingOrderId: number, beginServiceTime: number, endServiceTime: number): IPromise {
     const url = `/user/shopping/chose/service/time`
     return request({
       url,
@@ -85,6 +85,17 @@ const ShoppingApi = {
         shopId,
       },
       method: 'POST',
+    })
+  },
+  // 查询订单服务时间
+  findServiceTime(shoppingOrderId: number): IPromise {
+    const url = `/user/shopping/find/order/service/time`
+    return request({
+      url,
+      data: {
+        shoppingOrderId,
+      },
+      method: 'GET',
     })
   },
 }

@@ -43,7 +43,7 @@ import ShoppingApi from '@/request/api/shopping'
 
 interface Irest {
   data: {
-    shopId?: number
+    orderId?: number
     shopName?: string
     price?: number
     desc?: string
@@ -57,7 +57,7 @@ let balance = ref(0)
 onLoad((option) => {
   checkBalance()
   const obj = {}
-  obj['shopId'] = Number(option.shopId)
+  obj['orderId'] = Number(option.orderId)
   obj['shopName'] = option.shopName!
   obj['price'] = Number(option.price)
   obj['desc'] = option.desc!
@@ -89,7 +89,7 @@ function checkBalance() {
 }
 
 function payOrder() {
-  ShoppingApi.payShoppingOrder(rest.data?.shopId!).then((res) => {
+  ShoppingApi.payShoppingOrder(rest.data?.orderId!).then((res) => {
     if (res.code === 200) {
       uni.hideLoading()
       uni.navigateTo({

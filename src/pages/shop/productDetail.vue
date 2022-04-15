@@ -100,23 +100,23 @@ function placeOrder() {
   ShoppingApi.placeOrder(shopId, [commodityList]).then((res) => {
     console.log(res)
     let { price, description, name } = commodity.commodity!
-    const rest =
-      'shopId=' +
-      shopId +
-      '&shopName=' +
-      shopName +
-      '&price=' +
-      price +
-      '&desc=' +
-      description +
-      '&name=' +
-      name +
-      '&imgUrl=' +
-      commodity.commodity!.file[0].url
-    uni.navigateTo({
-      url: '/pages/shop/order/placeOrder?' + rest,
-    })
     if (res.code === 200) {
+      const rest =
+        'orderId=' +
+        res.data.shoppingOrderId +
+        '&shopName=' +
+        shopName +
+        '&price=' +
+        price +
+        '&desc=' +
+        description +
+        '&name=' +
+        name +
+        '&imgUrl=' +
+        commodity.commodity!.file[0].url
+      uni.navigateTo({
+        url: '/pages/shop/order/placeOrder?' + rest,
+      })
     } else {
       uni.showToast({
         title: res.msg || '订单创建失败',

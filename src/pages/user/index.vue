@@ -7,11 +7,19 @@
       />
       <text class="username">用户名</text>
     </view>
-    <div class="text-lg text-red-700">hello</div>
+    <view class="completeBtn">
+      <van-button round type="info" size="large" @click="jumpToOrderList()">订单</van-button>
+    </view>
   </view>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+function jumpToOrderList() {
+  uni.navigateTo({
+    url: '/pages/user/order/orderList',
+  })
+}
+</script>
 <style scoped lang="scss">
 .head {
   display: flex;

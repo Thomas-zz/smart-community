@@ -15,7 +15,7 @@
               <van-col span="4">{{ node.communityName }}</van-col>
               <van-col span="5">{{ item.type }}</van-col>
               <van-col span="4">{{ item.fare }}</van-col>
-              <van-col span="7">{{ item.createTime.split('T')[0].split('-').join('.') }}</van-col>
+              <van-col span="7">{{ item.createTime }}</van-col>
               <van-col span="4">
                 <p v-if="item.pay">已缴费</p>
                 <van-button v-else type="primary" size="mini" @click="payPopup(node.communityId, item.billId)"
@@ -166,6 +166,7 @@ function onCodeChange(event) {
 async function payForDetail() {
   console.log(showMsg.data?.billDetail?.billId)
   await UserApi.payBill(showMsg.data?.billDetail?.billId!, password.value).then((res) => {
+    console.log(res)
     if (res.code === 200) {
       // 获取更新后的账单
       getBillList()

@@ -110,10 +110,6 @@
       "style": {}
     },
     {
-      "path": "pages/shop/order/orderDetail",
-      "style": {}
-    },
-    {
       "path": "pages/shop/order/placeOrder",
       "style": {}
     },
@@ -122,7 +118,19 @@
       "style": {
         "navigationBarTitleText": "支付详情"
       }
-    }
+    },
+    {
+      "path": "pages/user/order/orderList",
+      "style": {
+        "navigationBarTitleText": "我的订单"
+      }
+    },
+    {
+      "path": "pages/user/order/orderDetail",
+      "style": {
+        "navigationBarTitleText": "订单详情"
+      }
+    },
   ],
   "condition": {
     //模式配置，仅开发期间生效
