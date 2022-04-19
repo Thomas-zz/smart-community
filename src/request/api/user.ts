@@ -13,6 +13,7 @@ const UserApi = {
   },
   // 用户支付账单
   payBill(billId: number, payPwd: string): IPromise {
+    console.log(billId, payPwd)
     const url = `/user/wx/pay/bill`
     return request({
       url,

@@ -103,15 +103,21 @@
     },
     {
       "path": "pages/shop/productPage",
-      "style": {}
+      "style": {
+        "navigationBarTitleText": "商铺"
+      }
     },
     {
       "path": "pages/shop/productDetail",
-      "style": {}
+      "style": {
+        "navigationBarTitleText": "商品详情"
+      }
     },
     {
       "path": "pages/shop/order/placeOrder",
-      "style": {}
+      "style": {
+        "navigationBarTitleText": "填写订单"
+      }
     },
     {
       "path": "pages/shop/order/paymentCompleted",

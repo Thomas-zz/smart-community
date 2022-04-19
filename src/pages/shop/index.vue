@@ -2,8 +2,14 @@
   <view>
     <view>
       <van-skeleton title avatar avatar-size="64px" row="3" avatar-shape="square" :loading="!shopsList.shopList">
-        <view v-for="item of shopsList.shopList" :key="item.shopId" @click="jumpToProduct(item.shopId)">
+        <view
+          class="card-box"
+          v-for="item of shopsList.shopList"
+          :key="item.shopId"
+          @click="jumpToProduct(item.shopId)"
+        >
           <van-card
+            custom-class="card"
             :desc="'营业时间：' + item.businessBeginTime.slice(0, 5) + ' - ' + item.businessEndTime.slice(0, 5)"
             :thumb="item.url"
             thumb-mode="aspectFill"
@@ -71,17 +77,25 @@ function jumpToProduct(shopId: number) {
 }
 </script>
 <style scoped lang="scss">
+.card-box {
+  border-bottom: 1rpx solid #f5f6f8;
+  .card {
+    background: #ffffff;
+  }
+}
+
 .title {
-  font-size: 36rpx;
+  font-size: 34rpx;
   font-weight: 700;
   margin-bottom: 6rpx;
 }
 .tags {
-  margin-top: 20rpx;
+  margin-top: 56rpx;
   .context {
+    font-size: 30rpx;
     border: 1rpx solid #cccccc;
     border-radius: 8rpx;
-    padding: 4rpx 8rpx;
+    padding: 4rpx 10rpx;
   }
 }
 </style>

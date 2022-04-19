@@ -18,9 +18,15 @@
           <view class="descript">{{ commodity.commodity.description }}</view>
         </view>
       </view>
-      <view class="to-shop"> <text>商铺名</text><text> 进店逛逛</text>> </view>
+      <view class="line"></view>
+      <view class="to-shop">
+        <text class="tags">店铺</text>
+        <text class="title">{{ shopName }}</text>
+      </view>
+      <view class="line"></view>
       <view class="detail">
         <view id="title">商品详情</view>
+        <view class="title-line"></view>
         <view class="showImg">
           <view v-for="(item, index) of commodity.commodity.file" :key="index">
             <image
@@ -127,6 +133,82 @@ function placeOrder() {
 }
 </script>
 <style scoped lang="scss">
+.head {
+  margin: 28rpx;
+  margin-top: 0;
+  .banner {
+    margin: 0 -28rpx;
+  }
+  .context {
+    .price {
+      margin: 18rpx 0;
+      vertical-align: middle;
+      .now-price {
+        font-size: 50rpx;
+        font-weight: bold;
+        color: #bb3b3f;
+      }
+      .origin-price {
+        margin-left: 20rpx;
+        font-size: 35rpx;
+        text-decoration: line-through;
+        color: #646566;
+      }
+    }
+    .title {
+      font-size: 40rpx;
+      font-weight: 600;
+      margin-bottom: 13rpx;
+    }
+    .descript {
+      font-size: 32rpx;
+      color: #646566;
+    }
+  }
+}
+
+.line {
+  height: 18rpx;
+  background: #f4f4f4;
+}
+
+.to-shop {
+  height: 80rpx;
+  padding: 0 28rpx;
+  padding-top: 15rpx;
+  // vertical-align: middle;
+  line-height: 60rpx;
+  .tags {
+    display: inline-block;
+    padding-left: 15rpx;
+    padding-right: 15rpx;
+    background: #bb3b3f;
+    border-radius: 10rpx;
+    color: #ffffff;
+    font-size: 30rpx;
+  }
+  .title {
+    margin-left: 15rpx;
+    font-size: 35rpx;
+  }
+}
+
+.detail {
+  padding: 28rpx;
+  #title {
+    font-size: 40rpx;
+    font-weight: bold;
+    padding-bottom: 15rpx;
+  }
+  .title-line {
+    margin: 0 -28rpx;
+    border-bottom: 1rpx solid #f5f5f5;
+  }
+  .showImg {
+    padding-top: 15rpx;
+  }
+}
+
 .bottom {
   position: fixed;
   bottom: 0;

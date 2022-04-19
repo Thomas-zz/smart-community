@@ -11,7 +11,7 @@
             clickable="true"
             :to="'../news/newsDetails?newsId=' + item.announcementId"
             :title="item.title"
-            :note="item.releaseTime.split('T').join(' ')"
+            :note="getLocalTime(item.releaseTime)"
           >
             <template v-slot:header>
               <!-- 当前判断长度只为简单判断类型，实际业务中，根据逻辑直接渲染即可 -->
@@ -67,6 +67,11 @@ function getNewsList(newsList: InewsList) {
     }
     console.log(newsList)
   })
+}
+
+// 日期格式化
+function getLocalTime(nS) {
+  return new Date(parseInt(nS)).toLocaleString().replace(/:\d{1,2}$/, ' ')
 }
 </script>
 <style scoped lang="scss">

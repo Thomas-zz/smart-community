@@ -15,7 +15,7 @@
               <van-col span="4">{{ node.communityName }}</van-col>
               <van-col span="5">{{ item.type }}</van-col>
               <van-col span="4">{{ item.fare }}</van-col>
-              <van-col span="7">{{ item.createTime }}</van-col>
+              <van-col span="7"><uni-dateformat :date="item.createTime" format="yyyy/MM/dd"></uni-dateformat></van-col>
               <van-col span="4">
                 <p v-if="item.pay">已缴费</p>
                 <van-button v-else type="primary" size="mini" @click="payPopup(node.communityId, item.billId)"

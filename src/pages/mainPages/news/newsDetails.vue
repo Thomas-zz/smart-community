@@ -7,7 +7,7 @@
             ><text user-select="true">{{ newsDetails.list?.title }}</text></view
           >
           <view class="sub-title"
-            ><text user-select="true">{{ newsDetails.list?.releaseTime.split('T').join(' ') }}</text></view
+            ><text user-select="true">{{ getLocalTime(newsDetails.list?.releaseTime) }}</text></view
           >
         </view>
         <view class="context">
@@ -69,6 +69,11 @@ function getNewsDetail(announcementId: number) {
     }
   })
 }
+
+// 日期格式化
+function getLocalTime(nS) {
+  return new Date(parseInt(nS)).toLocaleString().replace(/:\d{1,2}$/, ' ')
+}
 </script>
 <style scoped lang="scss">
 .container {
@@ -80,8 +85,8 @@ function getNewsDetail(announcementId: number) {
       line-height: 1.3em;
     }
     .sub-title {
-      margin-top: 14rpx;
-      margin-bottom: 30rpx;
+      margin-top: 16rpx;
+      margin-bottom: 32rpx;
       font-size: 26rpx;
       color: #777777;
     }

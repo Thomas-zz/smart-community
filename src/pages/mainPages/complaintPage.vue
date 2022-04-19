@@ -1,5 +1,5 @@
 <template>
-  <view> 缴费 </view>
+  <view> 投诉 </view>
 </template>
 
 <script setup lang="ts"></script>
