@@ -27,31 +27,31 @@
         </view>
       </view>
     </van-skeleton>
-    <van-popup round position="bottom" custom-style="height: 40%" :show="show" @close="closePopup">
+    <van-popup round position="bottom" custom-style="height: 44%" :show="show" @close="closePopup">
       <view class="pop-box" :class="{ toLeft: ifComfirm }">
         <view class="pop-context">
           <view class="pop-title">确认账单</view>
           <view class="pop-content">
             <view class="content-line">
               <text>所属小区</text>
-              <text>{{ showMsg.data?.communityName }}</text>
+              <text class="text2">{{ showMsg.data?.communityName }}</text>
             </view>
             <view class="content-line">
               <text>费用项</text>
-              <text>{{ showMsg.data?.billDetail!.type }}</text>
+              <text class="text2">{{ showMsg.data?.billDetail!.type }}</text>
             </view>
             <view class="content-line">
               <text>应缴费用</text>
-              <text>{{ showMsg.data?.billDetail!.fare }}</text>
+              <text class="text2">{{ showMsg.data?.billDetail!.fare }}</text>
             </view>
             <view class="content-line">
               <text>开具时间</text>
-              <text>{{ showMsg.data?.billDetail!.createTime }}</text>
+              <text class="text2">{{ showMsg.data?.billDetail!.createTime }}</text>
             </view>
-          </view>
-          <view class="content-line">
-            <van-button type="default" size="mini" @click="closePopup">取消</van-button>
-            <van-button type="primary" size="mini" @click="changePopup">缴费</van-button>
+            <view class="btn-line">
+              <!-- <van-button class="btn" type="default" size="" @click="closePopup">取消</van-button> -->
+              <van-button class="btn" type="primary" size="large" @click="changePopup">缴费</van-button>
+            </view>
           </view>
         </view>
         <view class="pop-pwd">
@@ -60,12 +60,15 @@
             <van-field
               :value="password"
               type="password"
+              label="密码"
               placeholder="请输入密码"
               :border="true"
               @change="onCodeChange"
             />
+            <view class="btn-line">
+              <van-button type="primary" size="large" @click="payForDetail">提交</van-button>
+            </view>
           </view>
-          <van-button type="default" size="mini" @click="payForDetail">提交</van-button>
         </view>
       </view>
     </van-popup>
@@ -218,32 +221,46 @@ function changePopup() {
 }
 
 .pop-box {
-  background: #25aff3;
+  // background: #25aff3;
   transform: translate(0);
   transition: all 0.3s ease-out;
   position: relative;
   height: 100%;
   width: 1500rpx;
   .pop-title {
-    font-size: 36rpx;
+    font-size: 52rpx;
+    height: 80rpx;
+    line-height: 80rpx;
     text-align: center;
-    background: #fe315d;
+    margin-top: 18rpx;
+    // background: #fe315d;
   }
   .pop-context {
     display: inline-block;
     vertical-align: top;
     width: 50%;
     height: 100%;
-    background: #bd3831;
+    // background: #bd3831;
 
     .pop-content {
-      background: #229342;
+      // background: #229342;
+      padding: 20rpx 36rpx;
       .content-line {
-        &:first-child {
-          background: #fbc21c;
-          width: 35%;
-        }
+        // display: block;
+        // width: 100%;
+        height: 60rpx;
+        line-height: 60rpx;
+        display: flex;
+        justify-content: space-between;
+        // background: yellow;
       }
+      .btn-line {
+        margin-top: 20rpx;
+      }
+    }
+    .content-line {
+      // display: flex;
+      // justify-content: space-around;
     }
   }
   .pop-pwd {
@@ -251,7 +268,15 @@ function changePopup() {
     vertical-align: top;
     width: 50%;
     height: 100%;
-    background: #2e2e2e;
+    // background: #2e2e2e;
+    .pwdInput {
+      margin-top: 50rpx;
+      padding: 30rpx;
+      .btn-line {
+        margin-top: 60rpx;
+        padding: 0 40rpx;
+      }
+    }
   }
 }
 
