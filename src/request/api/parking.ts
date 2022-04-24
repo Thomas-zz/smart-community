@@ -3,9 +3,9 @@ import { request } from '../request'
 type IPromise = Promise<any>
 
 const ParkingApi = {
-  // 获取停车位列表
+  // 查看小区所有车位
   getParkingList(): IPromise {
-    const url = `/user/list/parking/space`
+    const url = `/user/parking/space/find`
     return request({
       url,
       method: 'GET',
@@ -13,15 +13,23 @@ const ParkingApi = {
   },
   // 统计车位出售和出租情况
   getParkingCount(): IPromise {
-    const url = `/user/count/parking/space`
+    const url = `/user/parking/space/count/parking/space`
     return request({
       url,
       method: 'GET',
     })
   },
-  // 业主拥有的车位
+  // 停车位详细信息
+  getParkingDetail(): IPromise {
+    const url = `/user/parking/space/detail`
+    return request({
+      url,
+      method: 'GET',
+    })
+  },
+  // 查看业主拥有的车位
   getParkingSpace(): IPromise {
-    const url = `/user/parking/space`
+    const url = `/user/parking/space/parking/space`
     return request({
       url,
       method: 'GET',

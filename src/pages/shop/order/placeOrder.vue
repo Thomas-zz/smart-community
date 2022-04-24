@@ -3,13 +3,16 @@
     <van-skeleton title row="3" :loading="!rest.data">
       <view class="context">
         <view class="title">
-          <text class="shop-name">{{ rest.data?.shopName }}</text>
+          <view class="shopName">
+            <text class="flag">店铺</text><text class="shop-name">{{ rest.data?.shopName }}</text>
+          </view>
           <van-card
             num="1"
             :price="rest.data?.price"
             :desc="rest.data?.desc"
             :title="rest.data?.name"
             :thumb="rest.data?.url"
+            thumb-mode="aspectFill"
           />
         </view>
       </view>
@@ -22,14 +25,11 @@
       </view>
     </van-skeleton>
     <view class="bottom">
-      <view class="price">
-        <text class="now-price"
-          >应付<text class="total">¥{{ rest.data?.price }}</text></text
-        >
+      <view id="price" class="price">
+        <text class="should-price">应付: </text>
+        <text class="price">¥{{ rest.data?.price }}</text>
       </view>
-      <view class="buy">
-        <view class="buy-btn" @click="payOrder()">提交订单</view>
-      </view>
+      <button class="btn" @click="payOrder()">立即购买</button>
     </view>
   </view>
 </template>
@@ -105,13 +105,61 @@ function payOrder() {
 }
 </script>
 <style scoped lang="scss">
+.shopName {
+  margin: 30rpx;
+  height: 30px;
+  line-height: 30px;
+  .flag {
+    display: inline-block;
+    padding-left: 15rpx;
+    padding-right: 15rpx;
+    line-height: 54rpx;
+    background: #dd5347;
+    border-radius: 10rpx;
+    color: #ffffff;
+    font-size: 30rpx;
+  }
+  .shop-name {
+    margin-left: 18rpx;
+  }
+}
+
+.detail {
+  margin: 30rpx 0;
+}
+
+.price {
+  vertical-align: middle;
+  .price {
+    font-size: 50rpx;
+    font-weight: bold;
+    color: #dd5347;
+    padding-left: 20rpx;
+  }
+  .should-price {
+    margin-left: 30rpx;
+    font-size: 35rpx;
+    color: #646566;
+  }
+}
 .bottom {
   position: fixed;
   bottom: 0;
   background: #ffffff;
-  .price {
-    display: inline-block;
-    width: 50%;
+  height: 50px;
+  line-height: 50px;
+  width: 100%;
+  .btn {
+    width: 140px;
+    height: 40px;
+    line-height: 40px;
+    color: #ffffff;
+    font-size: 16px;
+    position: absolute;
+    right: 30rpx;
+    top: 50%;
+    transform: translateY(-50%);
+    background: #dd5347;
   }
   .buy {
     display: inline-block;

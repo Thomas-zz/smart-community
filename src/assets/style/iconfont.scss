@@ -1,8 +1,8 @@
 @font-face {
   font-family: "iconfont"; /* Project id 3243489 */
-  src: url('//at.alicdn.com/t/font_3243489_exyjmb0rplp.woff2?t=1649502089509') format('woff2'),
-       url('//at.alicdn.com/t/font_3243489_exyjmb0rplp.woff?t=1649502089509') format('woff'),
-       url('//at.alicdn.com/t/font_3243489_exyjmb0rplp.ttf?t=1649502089509') format('truetype');
+  src: url('//at.alicdn.com/t/font_3243489_7vi8ma960yh.woff2?t=1650688126928') format('woff2'),
+       url('//at.alicdn.com/t/font_3243489_7vi8ma960yh.woff?t=1650688126928') format('woff'),
+       url('//at.alicdn.com/t/font_3243489_7vi8ma960yh.ttf?t=1650688126928') format('truetype');
 }
 
 .iconfont {
@@ -11,6 +11,34 @@
   font-style: normal;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+.iconfont-essential-information:before {
+  content: "\e612";
+}
+
+.iconfont-daishiyong1:before {
+  content: "\e611";
+}
+
+.iconfont-daiqueren:before {
+  content: "\e6a5";
+}
+
+.iconfont-daifukuan:before {
+  content: "\e614";
+}
+
+.iconfont-yiquxiao:before {
+  content: "\e602";
+}
+
+.iconfont-daishiyong:before {
+  content: "\e643";
+}
+
+.iconfont-zhifuchenggong:before {
+  content: "\e663";
 }
 
 .iconfont-xiangxia:before {

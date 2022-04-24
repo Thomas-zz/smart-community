@@ -4,7 +4,7 @@ type IPromise = Promise<any>
 
 const FeedbackApi = {
   // 获取反馈列表
-  getUserInfo(type: string): IPromise {
+  getFeedbackList(type: string): IPromise {
     const url = `/user/feedback/list`
     return request({
       url,
@@ -14,7 +14,7 @@ const FeedbackApi = {
       method: 'GET',
     })
   },
-  // 获取反馈列表
+  // 提交反馈
   sendFeedback(context: string, type: string, fileId: string): IPromise {
     const url = `/user/feedback/list`
     return request({

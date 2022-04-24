@@ -20,7 +20,7 @@
           <view class="title">商品</view>
           <view v-for="item of productList.list" :key="item.commodityId" @click="jumpToDetail(item.commodityId)">
             <van-card
-              desc="嗨嗨嗨"
+              desc="点击查看商品详情"
               :origin-price="item.price"
               :price="item.price * item.discount"
               :thumb="item.url"

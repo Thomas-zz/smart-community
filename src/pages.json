@@ -11,12 +11,7 @@
     {
       "path": "pages/index/index",
       "style": {
-        "navigationBarTitleText": "住得好",
-        "usingComponents": {
-          "van-notice-bar": "/wxcomponents/vant/notice-bar/index",
-          "van-grid": "/wxcomponents/vant/grid/index",
-          "van-grid-item": "/wxcomponents/vant/grid-item/index"
-        }
+        "navigationBarTitleText": "住得好"
       }
     },
     {
@@ -37,6 +32,7 @@
     {
       "path": "pages/user/index",
       "style": {
+        "navigationBarBackgroundColor": "#fee1bf",
         "navigationBarTitleText": "用户中心"
       }
     },
@@ -104,7 +100,7 @@
     {
       "path": "pages/shop/productPage",
       "style": {
-        "navigationBarTitleText": "商铺"
+        "navigationBarTitleText": "商家"
       }
     },
     {
@@ -116,7 +112,7 @@
     {
       "path": "pages/shop/order/placeOrder",
       "style": {
-        "navigationBarTitleText": "填写订单"
+        "navigationBarTitleText": "确认订单"
       }
     },
     {
@@ -137,6 +133,12 @@
         "navigationBarTitleText": "订单详情"
       }
     },
+    {
+      "path": "pages/user/server/feedback",
+      "style": {
+        "navigationBarTitleText": "我的反馈"
+      }
+    }
   ],
   "condition": {
     //模式配置，仅开发期间生效
@@ -151,7 +153,7 @@
   },
   "tabBar": {
     "color": "#666666",
-    "selectedColor": "#f10b2e",
+    "selectedColor": "#dd5347",
     "list": [
       {
         "pagePath": "pages/index/index",
@@ -163,7 +165,7 @@
         "pagePath": "pages/shop/index",
         "iconPath": "/static/福利.png",
         "selectedIconPath": "/static/福利-click.png",
-        "text": "社区福利"
+        "text": "社区商城"
       },
       {
         "pagePath": "pages/user/index",
@@ -175,7 +177,7 @@
   },
   "globalStyle": {
     "navigationBarTextStyle": "black",
-    "navigationBarTitleText": "uni-app",
+    "navigationBarTitleText": "住得好",
     "navigationBarBackgroundColor": "#F8F8F8",
     "backgroundColor": "#F8F8F8",
     "usingComponents": {
@@ -198,7 +200,9 @@
       "van-transition": "/wxcomponents/vant/transition/index",
       "van-dialog": "/wxcomponents/vant/dialog/index",
       "van-card": "/wxcomponents/vant/card/index",
-      "van-notice-bar": "/wxcomponents/vant/notice-bar/index"
+      "van-notice-bar": "/wxcomponents/vant/notice-bar/index",
+      "van-tab": "/wxcomponents/vant/tab/index",
+      "van-tabs": "/wxcomponents/vant/tabs/index"
     }
   }
 }

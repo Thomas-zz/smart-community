@@ -1,6 +1,6 @@
 <template>
   <view>
-    <view>
+    <view v-if="isLogin()">
       <van-skeleton title avatar avatar-size="64px" row="3" avatar-shape="square" :loading="!shopsList.shopList">
         <view
           class="card-box"
@@ -24,6 +24,7 @@
         </view>
       </van-skeleton>
     </view>
+    <view v-else class="unLogin"><text>您还未登录哦~</text><br /><text>登录后查看社区商城</text></view>
   </view>
 </template>
 
@@ -70,6 +71,11 @@ watch(
   { immediate: true }
 )
 
+// 是否已经登录
+const isLogin = () => {
+  return store.getters.getUserToken !== ''
+}
+
 function jumpToProduct(shopId: number) {
   uni.navigateTo({
     url: '/pages/shop/productPage?shopId=' + shopId,
@@ -82,6 +88,13 @@ function jumpToProduct(shopId: number) {
   .card {
     background: #ffffff;
   }
+}
+
+.unLogin {
+  padding-top: 80px;
+  font-size: 45rpx;
+  text-align: center;
+  font-weight: 500;
 }
 
 .title {

@@ -1,5 +1,5 @@
 <template>
-  <view>
+  <view class="content">
     <van-skeleton title avatar avatar-size="64px" row="3" avatar-shape="square" :loading="!shopDetail.list">
       <view class="head">
         <view class="shop-name">{{ shopDetail.list?.shopName }}</view>
@@ -12,19 +12,33 @@
             </van-card>
           </view>
         </view>
-        <view class="total-price">实付款：{{ shopDetail.list?.total }}</view>
+        <view class="total-price">实付款：¥{{ shopDetail.list?.total }}</view>
       </view>
       <view class="context">
         <view class="order-message">订单信息</view>
         <uni-list>
           <uni-list-item title="订单状态:" :rightText="shopDetail.list?.orderStatus" />
-          <uni-list-item
-            title="支付时间:"
-            :rightText="shopDetail.list?.payTime !== null ? shopDetail.list?.payTime : '待支付'"
-          />
-          <uni-list-item title="预约时间:" :rightText="computedServiceTime()" />
+          <uni-list-item title="支付时间:">
+            <template v-slot:footer>
+              <uni-dateformat
+                class="paytime"
+                :date="shopDetail.list?.payTime !== null ? shopDetail.list?.payTime : '待支付'"
+                format="yyyy/MM/dd"
+              ></uni-dateformat>
+            </template>
+          </uni-list-item>
+          <uni-list-item title="预约时间:" :rightText="computedServiceTime()">
+            <template v-slot:footer>
+              <template v-if="serviceTime.servicetime.length === 0"> 暂未选择预约时间 </template>
+              <template v-else>
+                <uni-dateformat class="paytime" :date="serviceTime.servicetime[0]" format="yyyy/MM/dd"></uni-dateformat>
+                -
+                <uni-dateformat class="paytime" :date="serviceTime.servicetime[1]" format="yyyy/MM/dd"></uni-dateformat>
+              </template>
+            </template>
+          </uni-list-item>
           <view v-if="shopDetail.list?.orderStatus === '已支付,待商家确认'">
-            <view class="title">选择预约时间</view>
+            <view class="time-title">选择预约时间</view>
             <uni-datetime-picker
               v-model="datetimerange.list"
               rangeSeparator="至"
@@ -36,33 +50,26 @@
           </view>
         </uni-list>
       </view>
-      <van-button
-        v-if="shopDetail.list?.orderStatus === '已支付,待商家确认'"
-        round
-        type="info"
-        size="large"
-        @click="chooseTime()"
-        >{{ serviceTime.servicetime.length === 0 ? '确认预约时间' : '修改预约时间' }}</van-button
-      >
-      <van-button
-        v-if="shopDetail.list?.orderStatus === '已支付,待商家确认' || shopDetail.list?.orderStatus === '待支付'"
-        round
-        type="info"
-        size="large"
-        @click="cancelOrder()"
-        >取消订单</van-button
-      >
-      <van-button v-if="shopDetail.list?.orderStatus === '待支付'" round type="info" size="large" @click="goPay()"
-        >去支付</van-button
-      >
-      <van-button
-        v-if="shopDetail.list?.orderStatus === '商家已确认' && serviceTime.servicetime.length !== 0"
-        round
-        type="info"
-        size="large"
-        @click="confirmOrder()"
-        >订单完成</van-button
-      >
+      <view class="btn-content">
+        <button v-if="shopDetail.list?.orderStatus === '已支付,待商家确认'" class="btn" @click="chooseTime()">
+          {{ serviceTime.servicetime.length === 0 ? '确认预约时间' : '修改预约时间' }}
+        </button>
+        <button
+          v-if="shopDetail.list?.orderStatus === '已支付,待商家确认' || shopDetail.list?.orderStatus === '待支付'"
+          class="btn"
+          @click="cancelOrder()"
+        >
+          取消订单
+        </button>
+        <button v-if="shopDetail.list?.orderStatus === '待支付'" class="btn" @click="goPay()">去支付</button>
+        <button
+          v-if="shopDetail.list?.orderStatus === '商家已确认' && serviceTime.servicetime.length !== 0"
+          class="btn"
+          @click="confirmOrder()"
+        >
+          订单完成
+        </button>
+      </view>
     </van-skeleton>
   </view>
 </template>
@@ -211,4 +218,55 @@ function goPay() {
   })
 }
 </script>
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+.content {
+  min-height: 100vh;
+  background-color: #f4f4f4;
+  .head {
+    padding: 20rpx 0;
+    background: #fafafa;
+  }
+  .shop-name {
+    // font-size: 40rpx;
+    font-weight: 500;
+  }
+}
+
+.paytime {
+  font-size: 28rpx;
+  color: #999999;
+}
+
+.shop-name,
+.total-price,
+.order-message,
+.time-title {
+  margin-left: 30rpx;
+}
+
+.context {
+  margin-top: 30rpx;
+  margin-bottom: 20rpx;
+  background: #fafafa;
+  .order-message {
+    // font-size: 40rpx;
+    font-weight: 500;
+    padding: 2 rpx;
+  }
+}
+
+.btn-content {
+  margin: 0 30rpx;
+  .btn {
+    width: 70%;
+    height: 30px;
+    margin-bottom: 20rpx;
+    line-height: 30px;
+    font-size: 30rpx;
+    padding: 0;
+    border: 1px solid #dd5347;
+    color: #dd5347;
+    border-radius: 20rpx;
+  }
+}
+</style>

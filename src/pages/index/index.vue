@@ -26,7 +26,8 @@
       </van-grid-item>
     </van-grid>
 
-    <text selectable="true">userCode: {{ loginCode }}</text>
+    <!-- <text selectable="true">userCode: {{ loginCode }}</text> -->
+    <view class="shoplist"><ShopList /></view>
   </view>
 </template>
 
@@ -36,6 +37,7 @@ import loginApi from '@/request/api/login'
 import UserApi from '@/request/api/user'
 import store from '@/store/index'
 import CommunityApi from '@/request/api/community'
+import ShopList from '@/pages/shop/index.vue'
 
 // 主要模块的展示
 const { mainModules, jumpTo } = mainModule()
@@ -220,12 +222,15 @@ function changeCommunity() {
     margin-top: 10rpx;
     text-align: center;
   }
+  .shoplist {
+    margin: 0 -20rpx;
+  }
 }
 
-.title {
-  font-size: 36rpx;
-  color: #8f8f94;
-}
+// .title {
+//   font-size: 36rpx;
+//   color: #8f8f94;
+// }
 
 .userMsg {
   display: flex;

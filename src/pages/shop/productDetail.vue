@@ -5,7 +5,7 @@
         <view class="banner">
           <image
             style="width: 100%; height: 200px; background-color: #eeeeee"
-            mode="sapectFill"
+            mode="aspectFill"
             :src="commodity.commodity.file[0].url"
           ></image>
         </view>
@@ -32,7 +32,7 @@
             <image
               v-if="item.fileType === 'image'"
               style="width: 100%; background-color: #eeeeee"
-              mode="sapectFill"
+              mode="widthFix"
               :src="item.url"
             ></image>
           </view>
@@ -40,13 +40,17 @@
       </view>
     </van-skeleton>
     <view class="bottom">
-      <view class="price">
-        <text class="now-price">价格</text>
-        <text class="origin-price">原价</text>
+      <view id="price" class="price">
+        <text class="now-price">¥{{ commodity.commodity.price * commodity.commodity.discount }}</text>
+        <text class="origin-price">¥{{ commodity.commodity.price }}</text>
       </view>
-      <view class="buy">
+      <!-- <view class="buy">
         <view class="buy-btn" @click="placeOrder()">立即购买</view>
-      </view>
+      </view> -->
+      <!-- <view class="btn">
+        <van-button color="#dd5347" size="large" round type="info" @click="placeOrder()">立即购买</van-button>
+      </view> -->
+      <button class="btn" @click="placeOrder()">立即购买</button>
     </view>
   </view>
 </template>
@@ -140,21 +144,6 @@ function placeOrder() {
     margin: 0 -28rpx;
   }
   .context {
-    .price {
-      margin: 18rpx 0;
-      vertical-align: middle;
-      .now-price {
-        font-size: 50rpx;
-        font-weight: bold;
-        color: #bb3b3f;
-      }
-      .origin-price {
-        margin-left: 20rpx;
-        font-size: 35rpx;
-        text-decoration: line-through;
-        color: #646566;
-      }
-    }
     .title {
       font-size: 40rpx;
       font-weight: 600;
@@ -164,6 +153,22 @@ function placeOrder() {
       font-size: 32rpx;
       color: #646566;
     }
+  }
+}
+
+.price {
+  margin: 18rpx 0;
+  vertical-align: middle;
+  .now-price {
+    font-size: 50rpx;
+    font-weight: bold;
+    color: #dd5347;
+  }
+  .origin-price {
+    margin-left: 20rpx;
+    font-size: 35rpx;
+    text-decoration: line-through;
+    color: #646566;
   }
 }
 
@@ -182,7 +187,7 @@ function placeOrder() {
     display: inline-block;
     padding-left: 15rpx;
     padding-right: 15rpx;
-    background: #bb3b3f;
+    background: #dd5347;
     border-radius: 10rpx;
     color: #ffffff;
     font-size: 30rpx;
@@ -213,9 +218,24 @@ function placeOrder() {
   position: fixed;
   bottom: 0;
   background: #ffffff;
-  .price {
-    display: inline-block;
-    width: 50%;
+  height: 50px;
+  line-height: 50px;
+  width: 100%;
+  #price {
+    margin: 0;
+    margin-left: 30rpx;
+  }
+  .btn {
+    width: 140px;
+    height: 40px;
+    line-height: 40px;
+    color: #ffffff;
+    font-size: 16px;
+    position: absolute;
+    right: 30rpx;
+    top: 50%;
+    transform: translateY(-50%);
+    background: #dd5347;
   }
   .buy {
     display: inline-block;

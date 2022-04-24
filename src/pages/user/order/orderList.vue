@@ -1,6 +1,21 @@
 <template>
   <view>
     <view>
+      <van-tabs
+        :active="active"
+        :change="onChange"
+        line-width="20px"
+        line-height="2px"
+        title-inactive-color="#525252"
+        title-active-color="#dd5347"
+      >
+        <van-tab title="全部"></van-tab>
+        <van-tab title="待付款"></van-tab>
+        <van-tab title="待确认"></van-tab>
+        <van-tab title="待使用"></van-tab>
+        <van-tab title="已完成"></van-tab>
+        <van-tab title="已取消"></van-tab>
+      </van-tabs>
       <van-skeleton title avatar avatar-size="64px" row="3" avatar-shape="square" :loading="!orderList.list">
         <view v-for="item of orderList.list" :key="item.shoppingOrderId" @click="jumpToDetail(item.shoppingOrderId)">
           <van-card
@@ -25,7 +40,7 @@
 <script setup lang="ts">
 import ShoppingApi from '@/request/api/shopping'
 import { onShow } from '@dcloudio/uni-app'
-import { reactive } from 'vue'
+import { reactive, ref } from 'vue'
 
 interface IorderList {
   list:
@@ -42,6 +57,11 @@ interface IorderList {
 }
 
 const orderList: IorderList = reactive({ list: null })
+
+let active = ref(0)
+function onChange(event) {
+  active.value = event.detail
+}
 
 onShow(() => {
   console.log('hi')
