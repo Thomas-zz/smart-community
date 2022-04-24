@@ -1,18 +1,5 @@
 <template>
   <view class="content">
-    <!-- <image class="logo" src="/static/logo.png" /> -->
-    <!-- <view class="">
-      <uni-forms :model-value="formData">
-        <uni-forms-item label="手机号" name="phone">
-          <uni-easyinput v-model="formData.phone" type="text" placeholder="请输入电话号码" />
-        </uni-forms-item>
-        <uni-forms-item name="checkCode" label="验证码">
-          <uni-easyinput v-model="formData.checkCode" type="text" multiple />
-        </uni-forms-item>
-        <button @click="sendCheckCode">获取验证码</button>
-      </uni-forms>
-      <button @click="submitForm">注册</button>
-    </view> -->
     <van-cell-group>
       <van-field
         :value="formData.phone"

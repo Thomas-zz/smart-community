@@ -61,7 +61,7 @@ function getNewsList(newsList: InewsList) {
       newsList.list = res.data
     } else {
       uni.showToast({
-        title: res.msg || '新闻列表获取失败，请刷新重试',
+        title: res.msg || '公告列表获取失败，请刷新重试',
         icon: 'none',
       })
     }

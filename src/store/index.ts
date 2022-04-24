@@ -32,7 +32,7 @@ interface IuserMsg {
 }
 
 // 用户所属的小区列表
-interface IcommunityList {
+interface Icommunity {
   communityId: number
   location: string
   name: string
@@ -45,7 +45,7 @@ interface IcommunityMsg {
     location: string
     name: string
   } | null
-  communityList?: IcommunityList[]
+  communityList?: Icommunity[]
 }
 
 const store = createStore({
