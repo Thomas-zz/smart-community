@@ -62,9 +62,15 @@
       }
     },
     {
-      "path": "pages/mainPages/parkingSpacePage",
+      "path": "pages/mainPages/parking/parkingSpacePage",
       "style": {
         "navigationBarTitleText": "停车位"
+      }
+    },
+    {
+      "path": "pages/mainPages/parking/parkingDetail",
+      "style": {
+        "navigationBarTitleText": "车位详情"
       }
     },
     {

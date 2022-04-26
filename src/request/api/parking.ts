@@ -4,10 +4,14 @@ type IPromise = Promise<any>
 
 const ParkingApi = {
   // 查看小区所有车位
-  getParkingList(): IPromise {
+  getParkingList(pageNum: number = 1, pageSize: number = 10): IPromise {
     const url = `/user/parking/space/find`
     return request({
       url,
+      data: {
+        pageNum,
+        pageSize,
+      },
       method: 'GET',
     })
   },
@@ -20,10 +24,13 @@ const ParkingApi = {
     })
   },
   // 停车位详细信息
-  getParkingDetail(): IPromise {
+  getParkingDetail(parkingSpaceId: number): IPromise {
     const url = `/user/parking/space/detail`
     return request({
       url,
+      data: {
+        parkingSpaceId,
+      },
       method: 'GET',
     })
   },

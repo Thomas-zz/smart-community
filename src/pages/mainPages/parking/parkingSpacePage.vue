@@ -1,21 +1,28 @@
 <template>
   <view>
-    <van-skeleton title avatar row="3" :loading="newsList.list === null">
+    <van-skeleton title avatar row="3" :loading="parkingList.list === null">
       <view>
         <uni-list :border="true">
           <uni-list-item
-            v-for="item in newsList.list?.data"
-            :key="item.announcementId"
+            v-for="item in parkingList.list?.data"
+            :key="item.parkingSpaceId"
             direction="row"
             ellipsis="2"
             clickable="true"
-            :to="'../news/newsDetails?newsId=' + item.announcementId"
-            :title="item.title"
-            :note="getLocalTime(item.releaseTime)"
+            :note="item.size"
+            :title="item.name"
+            :to="'../parking/parkingDetail?parkingSpaceId=' + item.parkingSpaceId"
           >
             <template v-slot:header>
               <!-- 当前判断长度只为简单判断类型，实际业务中，根据逻辑直接渲染即可 -->
               <image class="image-1" :src="item.url ? item.url : defaultImgUrl" mode="aspectFill"></image>
+            </template>
+            <!-- <template v-slot:body>
+              <view>车位编号：{{ item.name }}</view>
+            </template> -->
+            <template v-slot:footer>
+              <template v-if="item.hasOwner"><view>已出售</view></template>
+              <template v-else><view>可购买</view></template>
             </template>
           </uni-list-item>
         </uni-list>
@@ -53,18 +60,18 @@ const defaultImgUrl = `https://intelligent-community.oss-cn-guangzhou.aliyuncs.c
 
 let parkingList: IparkingList = reactive({ list: null })
 getParkingList(parkingList)
-function getParkingList(newsList: IparkingList) {
-  CommunityApi.getNewsList().then((res) => {
+function getParkingList(parkingList: IparkingList) {
+  ParkingApi.getParkingList().then((res) => {
     console.log(res)
     if (res.code === 200) {
-      newsList.list = res.data
+      parkingList.list = res.data
     } else {
       uni.showToast({
-        title: res.msg || '公告列表获取失败，请刷新重试',
+        title: res.msg || '车位列表获取失败，请刷新重试',
         icon: 'none',
       })
     }
-    console.log(newsList)
+    console.log(parkingList)
   })
 }
 

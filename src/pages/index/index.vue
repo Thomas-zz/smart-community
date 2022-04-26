@@ -77,7 +77,7 @@ function mainModule() {
       id: 5,
       name: '停车位',
       iconSrc: 'tingchewei',
-      jumpTo: '/pages/mainPages/parkingSpacePage',
+      jumpTo: '/pages/mainPages/parking/parkingSpacePage',
     },
     {
       id: 6,
